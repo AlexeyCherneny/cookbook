@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
+import { Facebook, Google } from 'expo';
 import styled from 'styled-components';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { connect } from 'react-redux';
+
+import { login } from './actions';
+import { LoadingScreen } from '../../components';
 
 import Fonts from '../../../constants/Fonts';
+import fbConfig from '../../../constants/fbConfig';
+import googleConfig from '../../../constants/googleConfig';
 
 const FlexContainer = styled.View`
   flex: 1;
   justifyContent: center;
   alignItems: center;
+  alignSelf: stretch;
 `;
 
 const RecipeText = styled.Text`
@@ -21,16 +30,65 @@ const BottomButtonWrapper = styled.View`
 `;
 
 const Button = styled.TouchableOpacity`
-  justifyContent: center;
+  justifyContent: space-around;
   alignItems: center;
   flex: 1;
-  backgroundColor: ${({ color }) => color}
+  backgroundColor: ${({ color }) => color};
+  flexDirection: row;
+  paddingHorizontal: 10;
 `;
 
+@connect(state => ({
+  isLoading: state.user.isLoading,
+  state,
+}), { login })
 export default class LoginScreen extends Component {
   state = {}
 
+  _onLoginPress = name => {
+    if (name === 'facebook') {
+      this._logInWithFacebook();
+    } else {
+      this._logInWithGoogle();
+    }
+  }
+
+  async _logInWithFacebook() {
+    const {
+      type,
+      token,
+    } = await Facebook.logInWithReadPermissionsAsync(fbConfig.APP_ID, {
+      permissions: ['public_profile', 'email'],
+    });
+
+    if (type === 'success') {
+      this.props.login(token, 'facebook');
+    } else {
+      throw new Error('Something wrong with facebook auth!');
+    }
+  }
+
+  async _logInWithGoogle() {
+    try {
+      const result = await Google.logInAsync({
+        iosClientId: googleConfig.CLIENT_ID_IOS,
+        scopes: ['profile', 'email'],
+      });
+
+      if (result.type === 'success') {
+        this.props.login(result.accessToken, 'google');
+      } else {
+        return { cancled: true };
+      }
+    } catch (err) {
+      throw err;
+    }
+  }
+
   render() {
+    if (this.props.isLoading) {
+      return <LoadingScreen color='red' />;
+    }
     return (
       <FlexContainer>
         <FlexContainer>
@@ -44,18 +102,20 @@ export default class LoginScreen extends Component {
           </FlexContainer> 
           <FlexContainer>  
             <Text style={Fonts.authWelcomeText}>
-              Start your <RecipeText>C1 ook</RecipeText> way
+              Start your <RecipeText>Cook</RecipeText> way
             </Text>
           </FlexContainer> 
         </FlexContainer>
 
         <FlexContainer>
           <BottomButtonWrapper>
-            <Button color='#f73859'>
-              <Text style={Fonts.buttonAuth}>Sign-Up</Text>
+            <Button color='#db3236' onPress={() => this._onLoginPress('google')}>
+              <Text style={Fonts.buttonAuth}>Connect with</Text>
+              <MaterialCommunityIcons name='google' size={30} color='#fff' />
             </Button>
-            <Button color='#f73859'>
-              <Text style={Fonts.buttonAuth}>Sign-Up</Text>
+            <Button color='#3b5998' onPress={() => this._onLoginPress('facebook')}>
+              <Text style={Fonts.buttonAuth}>connect-with</Text>
+              <MaterialCommunityIcons name='facebook' size={30} color='#fff' />
             </Button>
           </BottomButtonWrapper>
         </FlexContainer>

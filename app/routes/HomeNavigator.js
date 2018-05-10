@@ -1,29 +1,41 @@
 import React from 'react';
+import { View, Button, Alert } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
-import { TouchableOpacity } from 'react-native';
+import styled from 'styled-components/native';
+
+import Touchable from '@appandflow/touchable';
 
 import { HomeScreen, NotificationsScreen, ProfileScreen } from '../screens';
 
 const NavbarDefaultStyle = {
   backgroundColor: 'red',
+  marginTop: 20,
 };
+
+// const AddButton = styled.Touchable`
+//   marginRight: 10;
+// `;
 
 export default TabNavigator(
   {
     Home: {
       screen: HomeScreen,
       navigationOptions: ({ navigation }) => ({
-        title: 'ewfwef',
+        title: 'Home',
         headerStyle: NavbarDefaultStyle,
         headerRight: (
-          <TouchableOpacity style={{ marginRight: 3 }} onPress={() => navigation.navigate('CreateRecipe')}>
+          <Button title='add' onPress={() => {
+            // console.log('Nav was ')
+            // Alert.alert('You tapped the button!');
+            return navigation.navigate('CreateRecipe')
+          }
+          }>
             <MaterialIcons
               name='add-circle'
               size={30}
-              color='#ff'
             />
-          </TouchableOpacity>
+          </Button>
         ),
         tabBarIcon: ({ tintColor }) => (
           <FontAwesome
@@ -54,7 +66,7 @@ export default TabNavigator(
       screen: ProfileScreen,
       navigationOptions: () => ({
         headerStyle: NavbarDefaultStyle,
-        title: 'efsefse',
+        title: 'Profile',
         tabBarIcon: ({ tintColor }) => (
           <MaterialIcons
             name='account-circle'

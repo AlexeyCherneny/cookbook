@@ -35,6 +35,7 @@ class HomeScreen extends Component {
         </View>
       );
     }
+    console.log(categoryRecipes)
     return (
       <View style={styles.root}>
         <View style={styles.botContainer}>

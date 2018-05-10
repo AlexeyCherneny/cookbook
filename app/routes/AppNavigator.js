@@ -16,13 +16,14 @@ export default class AppNavigator extends Component {
   render() {
     const navigation = addNavigationHelpers({
       dispatch: this.props.dispatch,
-      state: this.props.navigations,
+      state: this.props.navigation,
     });
 
-    if (this.props.user.logged) {
+    if (this.props.user.isLogged) {
+      console.log('Navigation: ', navigation);
       return <Navigator navigation={navigation} />;
     }
-    return <LoginScreen />;      
+    return <LoginScreen />;   
   }
 }
 

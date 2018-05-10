@@ -1,7 +1,8 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import promiseMiddleware from 'redux-promise-middleware';
-
 import thunk from 'redux-thunk';
+import { autoRehydrate } from 'redux-persist';
+import { createLogger } from 'redux-logger';
 
 import reducers from './reducers';
 
@@ -10,16 +11,12 @@ const middlewares = [
   thunk,
 ];
 
-if (__DEV__) {
-  const { createLogger } = require('redux-logger');
-
-  middlewares.push(createLogger()); 
+if (__DEV__) { // eslint-disable-line
+  middlewares.push(createLogger());
 }
-
-const enhancers = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() || compose;
 
 export default createStore(
   reducers,
   undefined,
-  enhancers(applyMiddleware(...middlewares))
+  compose(applyMiddleware(...middlewares), autoRehydrate()),
 );

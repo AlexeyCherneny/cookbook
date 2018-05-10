@@ -19,8 +19,7 @@ import styles from './styles/CreateRecipeScreen';
 export default class CreateRecipeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Create recipe',
-    headerStyle: ({ color: 'white' }),
-    headerRight: ( 
+    headerLeft: (
       <TouchableOpacity style={styles.iconClose} onPress={() => navigation.goBack()}>
         <MaterialIcons
           name='close'
