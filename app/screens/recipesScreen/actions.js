@@ -8,6 +8,9 @@ export const SET_CURRENT_RECIPE = 'SET_CURRENT_RECIPE';
 export const UPDATE_RECIPE = 'UPDATE_RECIPE';
 export const UPDATE_RECIPE_SUCCESS = 'UPDATE_RECIPE_SUCCESS';
 export const UPDATE_RECIPE_ERROR = 'UPDATE_RECIPE_ERROR';
+export const DELETE_CATEGORY_RECIPE = 'DELETE_CATEGORY_RECIPE';
+export const DELETE_CATEGORY_RECIPE_SUCCESS = 'DELETE_CATEGORY_RECIPE_SUCCESS';
+export const DELETE_CATEGORY_RECIPE_ERROR = 'DELETE_CATEGORY_RECIPE_ERROR';
 
 export const setCurrentRecipe = (args) => ({
   type: SET_CURRENT_RECIPE,
@@ -31,3 +34,16 @@ export const updateRecipe = args => async dispatch => {
   }
 };
 
+export const deleteCategoryRecipe = args => async dispatch => {
+  dispatch({ type: DELETE_CATEGORY_RECIPE });
+
+  try {
+    const resp = await categoriesApi.deleteCategoryRecipe(args);
+
+    dispatch({ type: DELETE_CATEGORY_RECIPE_SUCCESS, payload: { ...resp, ...args } });
+  } catch (err) {
+    return dispatch({ type: DELETE_CATEGORY_RECIPE_ERROR });
+  }
+
+  return dispatch(fetchCategoryRecipes(args));
+};

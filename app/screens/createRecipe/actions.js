@@ -15,6 +15,7 @@ export const createRecipe = args => async dispatch => {
 
     dispatch({ type: CREATE_CATEGORY_RECIPE_SUCCES });
   } catch (err) {
+    console.log('Error: ', err);
     return dispatch({ type: CREATE_CATEGORY_RECIPE_ERROR });
   }
 

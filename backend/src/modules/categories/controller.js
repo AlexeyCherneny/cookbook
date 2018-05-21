@@ -29,6 +29,7 @@ export const createCategoryRecipe = async (req, res) => {
   const { title, description } = req.body;
   const { categoryId } = req.params;
 
+  console.log({ title, description, categoryId });
   if (!title) {
     return res.status(400).json({ error: 'Title must be provided' });
   } else if (typeof title !== 'string') {
@@ -66,34 +67,51 @@ export const createCategoryRecipe = async (req, res) => {
   }
 };
 
+// export const getCategoryRecipes = async (req, res) => {
+//   const { categoryId } = req.params;
+//   if (!categoryId) {
+//     return res
+//       .status(400)
+//       .json({ error: true, message: 'You need to provide a category id' });
+//   }
+
+//   const category = await Category.findById(categoryId);
+
+//   if (!category) {
+//     return res
+//       .status(400)
+//       .json({ error: true, message: "Category doesn't exist" });
+//   }
+
+//   try {
+//     return res.status(200).json({
+//       error: false,
+//       recipes: await Recipe.find({ category: categoryId }).populate(
+//         'category',
+//         'title'
+//       ),
+//     });
+//   } catch (err) {
+//     return res
+//       .status(400)
+//       .json({ error: true, message: 'Can not fetch category recipes' });
+//   }
+// };
+
 export const getCategoryRecipes = async (req, res) => {
   const { categoryId } = req.params;
-  if (!categoryId) {
-    return res
-      .status(400)
-      .json({ error: true, message: 'You need to provide a category id' });
-  }
-
-  const category = await Category.findById(categoryId);
-
-  if (!category) {
-    return res
-      .status(400)
-      .json({ error: true, message: "Category doesn't exist" });
-  }
 
   try {
-    return res.status(200).json({
-      error: false,
-      recipes: await Recipe.find({ category: categoryId }).populate(
-        'category',
-        'title'
-      ),
-    });
-  } catch (err) {
+    const category = await Category.findById(categoryId);
+    const recipeIds = category.recipes;
+
+    const recipes = await Recipe.find({ _id: { $in: recipeIds } });
+
+    return res.status(200).json({ recipes });
+  } catch (e) {
     return res
-      .status(400)
-      .json({ error: true, message: 'Can not fetch category recipes' });
+      .status(e.status)
+      .json({ error: true, message: 'Error with user categories' });
   }
 };
 
@@ -152,6 +170,7 @@ export const deleteCategoryRecipe = async (req, res) => {
 
   try {
     const response = await Category.removeRecipe(categoryId, { recipeId });
+    // await Recipe.removeRecipe(recipeId);
 
     return res.status(200).json({ ...response });
   } catch (e) {

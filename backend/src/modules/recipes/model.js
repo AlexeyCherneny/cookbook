@@ -20,4 +20,9 @@ const RecipeSchema = new Schema(
   { timestamps: true, usePushEach: true }
 );
 
+RecipeSchema.statics.removeRecipe = async function (recipeId) {
+  console.log('RecipeId: ', recipeId);
+  await this.deleteOne(recipeId);
+};
+
 export default mongoose.model('Recipe', RecipeSchema);

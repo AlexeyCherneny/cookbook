@@ -27,4 +27,9 @@ const RecipeSchema = new _mongoose.Schema({
   }
 }, { timestamps: true, usePushEach: true });
 
+RecipeSchema.statics.removeRecipe = async function (recipeId) {
+  console.log('RecipeId: ', recipeId);
+  await this.deleteOne(recipeId);
+};
+
 exports.default = _mongoose2.default.model('Recipe', RecipeSchema);

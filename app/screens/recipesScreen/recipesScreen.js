@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Alert } from 'react-native';
 import { connect } from 'react-redux';
 
-import { fetchCategoryRecipes, setCurrentRecipe } from './actions';
+import { fetchCategoryRecipes, setCurrentRecipe, deleteCategoryRecipe } from './actions';
 import { LoadingScreen, RecipesList, RecipeModal, RecipeProfileFormModal } from '../../components';
 import styles from './styles/recipesScreen';
 
@@ -14,6 +14,7 @@ import styles from './styles/recipesScreen';
   state,
 }), {
   fetchCategoryRecipes,
+  deleteCategoryRecipe,
   setCurrentRecipe,
 })
 class RecipesScreen extends Component {
@@ -38,14 +39,17 @@ class RecipesScreen extends Component {
     });
   }
 
-  handleDelete(args) {
+  handleDelete() {
     Alert.alert('Delete', 'Delete category', [
       { 
         text: 'Delete',
-        onPress: () => this.props.deleteCategory({
-          ...args,
-          userId: this.props.user.info.id,
-        }),
+        onPress: () => {
+          this.props.deleteCategoryRecipe({
+            recipeId: this.props.currentRecipe._id,
+            categoryId: this.props.currentCategory._id,
+          });
+          this.toggleRecipeModal();
+        },
       },
       { text: 'Cancel', onPress: () => {} },
     ]);
@@ -66,7 +70,7 @@ class RecipesScreen extends Component {
       categoryRecipes = this.props.recipes.categoryRecipes;
       error = this.props.recipes.error.on;  
     }
-
+    
     if (!isFetched) {
       return <LoadingScreen />;
     } else if (error.on) {

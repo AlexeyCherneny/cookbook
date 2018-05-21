@@ -10,8 +10,13 @@ class CategoriesApi {
   async fetchCategoryRecipes(args) {
     const { categoryId } = args;
     try {
+      console.log('--------------------------------------------------------');
+      console.log('Fetching category recipes...');
+      console.log('args: ', args);
       const { data } = await axios.get(`${this.path}/${categoryId}/recipes`);
 
+      console.log('Data: ', data);
+      console.log('---------------------------------------------------------');
       return data.recipes;
     } catch (err) {
       throw err;
@@ -20,10 +25,24 @@ class CategoriesApi {
 
   async createCategoryRecipe(args) {
     const { categoryId } = args;
-
+    console.log('Args: ', args);
     try {
       const resp = await axios.post(`${this.path}/${categoryId}/recipes/new`, { ...args });
 
+      return resp.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async deleteCategoryRecipe(args) {
+    const { categoryId } = args;
+    console.log('Args: ', args);
+
+    try {
+      const resp = await axios.delete(`${this.path}/${categoryId}/recipes`, { data: args });
+
+      console.log('Resp after delete: ', resp.data);
       return resp.data;
     } catch (err) {
       throw err;
@@ -108,12 +127,11 @@ class RecipesApi {
   }
 
   async updateRecipe(args) {
-    console.log('Updating recipe with args: ', args);
     const { recipeId } = args;
 
     try {
       const resp = await axios.post(`${this.path}/${recipeId}/update`, args);
-      console.log('Resp data: ', resp.data);
+
       return resp.data;
     } catch (err) {
       throw err;

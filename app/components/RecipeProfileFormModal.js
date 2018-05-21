@@ -22,7 +22,6 @@ class RecipeProfileModal extends Component {
   }
 
   render() {
-    console.log('Recipe title: ', this.props.recipe.title);
     return (
       <Modal
         visible={this.props.visible}

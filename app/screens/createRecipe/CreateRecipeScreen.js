@@ -41,6 +41,7 @@ export default class CreateRecipeScreen extends React.Component {
   render() {
     const { recipe } = this.props;
 
+    console.log('recipe.isLoading: ', recipe.isLoading)
     if (recipe.isLoading) {
       return (
         <View style={styles.root}>
@@ -57,7 +58,7 @@ export default class CreateRecipeScreen extends React.Component {
     return (
       <View style={styles.root}>
         <CreateRecipeForm
-          createRecipe={this._createRecipe}
+          createRecipe={(args) => this._createRecipe(args)}
         /> 
       </View>
     );

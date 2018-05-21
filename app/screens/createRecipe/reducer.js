@@ -1,6 +1,6 @@
 import {
   CREATE_CATEGORY_RECIPE,
-  CREATE_CATEGORY_RECIPE_SUCCESS,
+  CREATE_CATEGORY_RECIPE_SUCCES,
   CREATE_CATEGORY_RECIPE_ERROR,
 } from './actions';
 
@@ -19,7 +19,7 @@ export default (state = INITIAL_STATE, action) => {
         ...INITIAL_STATE,
         isLoading: true,
       };
-    case CREATE_CATEGORY_RECIPE_SUCCESS:
+    case CREATE_CATEGORY_RECIPE_SUCCES:
       return {
         ...INITIAL_STATE,
         isLoading: false,

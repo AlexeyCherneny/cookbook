@@ -3,6 +3,9 @@ import {
   UPDATE_RECIPE,
   UPDATE_RECIPE_SUCCESS,
   UPDATE_RECIPE_ERROR,
+  DELETE_CATEGORY_RECIPE,
+  DELETE_CATEGORY_RECIPE_SUCCESS,
+  DELETE_CATEGORY_RECIPE_ERROR,
 } from './actions';
 
 const initialState = {
@@ -83,6 +86,36 @@ export default (state = initialState, action) => {
         error: {
           on: true,
           message: 'Error while updating recipe',
+        },
+      };
+
+    case DELETE_CATEGORY_RECIPE:
+      return {
+        ...state,
+        isFetched: false,
+      };
+    case DELETE_CATEGORY_RECIPE_SUCCESS:
+      state.categoryRecipes.forEach((recipe, i) => {
+        if (recipe._id === action.payload.recipeId) {
+          recipeIndexInCategoryRecipes = i;
+        }
+      });
+      return {
+        ...state,
+        categoryRecipes: [
+          ...state.categoryRecipes.slice(0, recipeIndexInCategoryRecipes),
+          ...state.categoryRecipes.slice(recipeIndexInCategoryRecipes + 1),
+        ],
+        isFetched: true,
+      };
+    case DELETE_CATEGORY_RECIPE_ERROR:
+      return {
+        categories: [],
+        userCategories: [],
+        isFetched: true,
+        error: {
+          on: true,
+          message: 'Error while deleting recipes',
         },
       };
     default:

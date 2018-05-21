@@ -44,11 +44,7 @@ CategorySchema.statics.removeRecipe = async function (categoryId, args) {
   await category.save();
 
   const updatedCategory = await this.findById(categoryId);
-  console.log('Output after delete: ', {
-    updatedCategory,
-    recipeIds: updatedCategory.recipes,
-    recipeId: args.recipeId,
-  });
+  // await this.deleteOne(args.recipeId);
 
   return {
     updatedCategory,
