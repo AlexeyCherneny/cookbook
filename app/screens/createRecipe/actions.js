@@ -12,10 +12,11 @@ export const createRecipe = args => async dispatch => {
 
   try {
     await categoriesApi.createCategoryRecipe(args);
+
     dispatch({ type: CREATE_CATEGORY_RECIPE_SUCCES });
   } catch (err) {
     return dispatch({ type: CREATE_CATEGORY_RECIPE_ERROR });
   }
 
-  return await dispatch(fetchCategoryRecipes());
+  return await dispatch(fetchCategoryRecipes(args));
 };

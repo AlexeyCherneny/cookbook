@@ -20,6 +20,8 @@ const routes = new _express2.default();
 
 routes.post('/categories/new', CategoriesController.createCategory);
 routes.post('/categories/:categoryId/recipes/new', CategoriesController.createCategoryRecipe);
+routes.post('/categories/:categoryId/update', CategoriesController.updateCategory);
 routes.get('/categories/:categoryId/recipes', CategoriesController.getCategoryRecipes);
+routes.delete('/categories/:categoryId/recipes', CategoriesController.deleteCategoryRecipe);
 
 exports.default = routes;

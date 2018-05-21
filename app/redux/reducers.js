@@ -2,15 +2,19 @@ import { combineReducers } from 'redux';
 import { reducer as form } from 'redux-form';
 
 import {
-  HomeReducer,
   CreateRecipeReducer,
+  CreateUserCategoryReducer,
   UserReducer,
+  CategoriesReducer,
+  RecipesReducer,
 } from '../screens';
 import navigation from '../routes/navigationReducer';
 
 export default combineReducers({
-  home: HomeReducer,
+  recipes: RecipesReducer,
   createCategoryRecipe: CreateRecipeReducer,
+  createUserCategory: CreateUserCategoryReducer,
+  categories: CategoriesReducer,
   navigation,
   user: UserReducer,
   form,

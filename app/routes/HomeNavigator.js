@@ -1,41 +1,60 @@
 import React from 'react';
-import { View, Button, Alert } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
-import styled from 'styled-components/native';
 
-import Touchable from '@appandflow/touchable';
-
-import { HomeScreen, NotificationsScreen, ProfileScreen } from '../screens';
+import { NotificationsScreen, ProfileScreen, CategoriesScreen } from '../screens';
 
 const NavbarDefaultStyle = {
   backgroundColor: 'red',
   marginTop: 20,
 };
 
-// const AddButton = styled.Touchable`
-//   marginRight: 10;
-// `;
+const TitleDefaultStyle = {
+  color: 'white',
+  fontSize: 20,
+};
 
 export default TabNavigator(
+  // {
+  //   Home: {
+  //     screen: HomeScreen,
+  //     navigationOptions: ({ navigation }) => ({
+  //       title: 'Home',
+  //       headerStyle: NavbarDefaultStyle,
+  //       headerRight: (
+  //         <Button title='add' onPress={() => navigation.navigate('CreateRecipe')}>
+  //           <MaterialIcons
+  //             name='add-circle'
+  //             size={30}
+  //           />
+  //         </Button>
+  //       ),
+  //       tabBarIcon: ({ tintColor }) => (
+  //         <FontAwesome
+  //           name="home"
+  //           size={25}
+  //           color={tintColor}
+  //         />
+  //       ),
+  //     }),
+  //   },
   {
-    Home: {
-      screen: HomeScreen,
+    Categories: {
+      screen: CategoriesScreen,
       navigationOptions: ({ navigation }) => ({
-        title: 'Home',
+        title: 'Categories',
         headerStyle: NavbarDefaultStyle,
+        headerTitleStyle: TitleDefaultStyle,
         headerRight: (
-          <Button title='add' onPress={() => {
-            // console.log('Nav was ')
-            // Alert.alert('You tapped the button!');
-            return navigation.navigate('CreateRecipe')
-          }
-          }>
-            <MaterialIcons
-              name='add-circle'
-              size={30}
-            />
-          </Button>
+          <MaterialIcons
+            name='add-circle'
+            style={{
+              marginRight: 10,
+            }}
+            onPress={() => navigation.navigate('CreateCategory')}
+            size={35}
+            color='white'
+          />
         ),
         tabBarIcon: ({ tintColor }) => (
           <FontAwesome
@@ -74,6 +93,7 @@ export default TabNavigator(
             color={tintColor}
           />
         ),
+        tabBarHidden: true,
       }),
     },
   },

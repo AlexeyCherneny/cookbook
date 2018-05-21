@@ -1,16 +1,24 @@
 import React from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
 import styles from './styles/RecipesList';
 
-const RecipesList = ({ recipes }) => (
+const RecipesList = props => (
   <View style={styles.root}>
     <View style={styles.recipesListTitleContainer}>
-      <Text style={styles.recipesListTitle}>My recipes list</Text>
+      <Text style={styles.recipesListTitle}>{props.category.title}</Text>
     </View>
     <View style={styles.recipesListContentContainer}>
       <ScrollView>
-        {recipes.map((recipe, i) => (
-          <View key={i} style={styles.recipeCard}>
+        {props.recipes.map(recipe => (
+          <TouchableOpacity
+            onPress={() => props.showCurrentRecipe({ recipe })}
+            elevation={5}
+            key={`recipe-${recipe._id}`}
+            style={styles.recipeCard}
+          >
+            <View>
+              <Image resizeMode='cover' style={styles.preview} source={require('../img/s800.webp')} />
+            </View>
             <View style={styles.recipeCardTopContainer}>
               <Text style={styles.recipeCardTitle}>{recipe.title}</Text>
             </View>
@@ -19,7 +27,7 @@ const RecipesList = ({ recipes }) => (
                 {recipe.description}
               </Text>
             </View>
-          </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </View>

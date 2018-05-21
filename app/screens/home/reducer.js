@@ -1,5 +1,5 @@
 import {
-  FETCH_CATEGORY_RECIPES,
+  FETCH_CATEGORY_RECIPES, FETCH_USER_CATEGORIES,
 } from './actions';
 
 const INITIAL_STATE = {

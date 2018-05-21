@@ -20,7 +20,6 @@ export default class AppNavigator extends Component {
     });
 
     if (this.props.user.isLogged) {
-      console.log('Navigation: ', navigation);
       return <Navigator navigation={navigation} />;
     }
     return <LoginScreen />;   

@@ -2,16 +2,25 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 
-import { fetchCategoryRecipes } from './actions';
-import { LoadingScreen, RecipesList } from '../../components';
+import {
+  // fetchCategoryRecipes,
+  fetchUserCategories,
+} from './actions';
+import { LoadingScreen, RecipesList, CategoriesList } from '../../components';
 import styles from './styles/HomeScreen';
 
 @connect(state => ({
   recipes: state.home.recipes,
-}), { fetchCategoryRecipes })
+  id: state.user.info.id,
+  state,
+}), {
+  // fetchCategoryRecipes,
+  fetchUserCategories,
+})
 class HomeScreen extends Component {
   componentDidMount() {
-    this.props.fetchCategoryRecipes();
+    // this.props.fetchCategoryRecipes();
+    this.props.fetchUserCategories({ userId: this.props.id });
   }
 
   render() {
@@ -19,10 +28,10 @@ class HomeScreen extends Component {
     let categoryRecipes = [];
     let error = '';
 
-    if (this.props.recipes) {
-      isFetched = this.props.recipes.isFetched;
-      categoryRecipes = this.props.recipes.categoryRecipes;
-      error = this.props.recipes.error;
+    if (this.props.categories) {
+      isFetched = this.props.categories.isFetched;
+      categoryRecipes = this.props.categories.userCategories;
+      error = this.props.categories.error;
     }
     if (!isFetched) {
       return <LoadingScreen />;
@@ -38,11 +47,8 @@ class HomeScreen extends Component {
     console.log(categoryRecipes)
     return (
       <View style={styles.root}>
-        <View style={styles.botContainer}>
-          <Text>Home</Text>
-        </View>
         <View style={styles.topContainer}>
-          <RecipesList recipes={categoryRecipes} />
+          {/* <CategoriesList recipes={categories} /> */}
         </View>
       </View>
     );

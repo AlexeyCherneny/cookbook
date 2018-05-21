@@ -14,8 +14,10 @@ var _getUserInfo = require('./getUserInfo');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 async function facebookAuth(token) {
+  console.log('Token: ', token);
   try {
     const { data } = await _axios2.default.get(`https://graph.facebook.com/me?fields=email,name,picture&access_token=${token}`);
+    console.log('Request: ', data);
 
     return (0, _getUserInfo.getUserInfo)(data, 'facebook');
   } catch (e) {

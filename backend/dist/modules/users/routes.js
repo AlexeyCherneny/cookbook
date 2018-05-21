@@ -15,5 +15,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 const routes = new _express.Router();
 
 routes.post('/users/auth0', UserController.loginWithAuth0);
+routes.post('/users/:userId/categories', UserController.createUserCategory);
+routes.get('/users/:userId/categories', UserController.getUserCategories);
+routes.delete('/users/:userId/categories', UserController.deleteUserCategory);
 
 exports.default = routes;

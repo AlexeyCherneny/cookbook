@@ -17,6 +17,10 @@ const UserSchema = new _mongoose.Schema({
   },
   fullName: String,
   avatar: String,
+  categories: [{
+    type: _mongoose.Schema.Types.ObjectId,
+    ref: 'Category'
+  }],
   providerData: {
     uid: String,
     provider: String
@@ -35,6 +39,37 @@ UserSchema.statics.findOrCreate = async function (args) {
   } catch (err) {
     return err;
   }
+};
+
+UserSchema.statics.addCategory = async function (id, args) {
+  const Category = _mongoose2.default.model('Category');
+
+  const category = await new Category(Object.assign({}, args, { user: id }));
+
+  const user = await this.findByIdAndUpdate(id, {
+    $push: { categories: category.id }
+  });
+
+  return {
+    category: await category.save(),
+    user: user._id
+  };
+};
+
+UserSchema.statics.deleteCategory = async function (userId, args) {
+  let user = await this.findByIdAndUpdate(userId, {
+    $pull: { categories: { $in: [args.categoryId] } }
+  });
+
+  await user.save();
+
+  user = await this.findById(userId);
+
+  return {
+    user,
+    categoryIds: user.categories,
+    categoryId: args.categoryId
+  };
 };
 
 exports.default = _mongoose2.default.model('User', UserSchema);

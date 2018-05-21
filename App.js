@@ -35,11 +35,9 @@ export default class App extends React.Component {
     );
   }
   render() {
-    console.log('Ready: ', this.state.ready);
     if (!this.state.ready) {
       return <LoadingScreen />;
     }
-    console.log('Async stroage defined');
     return (
       <Provider store={store}>
         <Root />

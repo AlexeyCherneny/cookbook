@@ -7,6 +7,10 @@ const CategorySchema = new Schema(
       required: true,
       minLegth: [4, 'Title must be at least 4 caracters long'],
     },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
     recipes: [
       {
         type: Schema.Types.ObjectId,
@@ -17,7 +21,7 @@ const CategorySchema = new Schema(
   { timestamps: true, usePushEach: true }
 );
 
-CategorySchema.statics.addCategory = async function (id, args) {
+CategorySchema.statics.addRecipe = async function (id, args) {
   const Recipe = mongoose.model('Recipe');
 
   const recipe = await new Recipe({ ...args, category: id });
@@ -29,6 +33,27 @@ CategorySchema.statics.addCategory = async function (id, args) {
   return {
     recipe: await recipe.save(),
     category,
+  };
+};
+
+CategorySchema.statics.removeRecipe = async function (categoryId, args) {
+  const category = await this.findByIdAndUpdate(categoryId, {
+    $pull: { recipes: { $in: [args.recipeId] } },
+  });
+
+  await category.save();
+
+  const updatedCategory = await this.findById(categoryId);
+  console.log('Output after delete: ', {
+    updatedCategory,
+    recipeIds: updatedCategory.recipes,
+    recipeId: args.recipeId,
+  });
+
+  return {
+    updatedCategory,
+    recipeIds: updatedCategory.recipes,
+    recipeId: args.recipeId,
   };
 };
 

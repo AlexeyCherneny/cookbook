@@ -6,7 +6,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 
 import { login } from './actions';
-import { LoadingScreen } from '../../components';
+// import { LoadingScreen } from '../../components';
 
 import Fonts from '../../../constants/Fonts';
 import fbConfig from '../../../constants/fbConfig';
@@ -86,9 +86,10 @@ export default class LoginScreen extends Component {
   }
 
   render() {
-    if (this.props.isLoading) {
-      return <LoadingScreen color='red' />;
-    }
+    console.log('Rendering Loading screen');
+    // if (this.props.isLoading) {
+    //   return <LoadingScreen color='red' />;
+    // }
     return (
       <FlexContainer>
         <FlexContainer>

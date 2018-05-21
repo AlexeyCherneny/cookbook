@@ -1,18 +1,16 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://606fc638.ngrok.io';
-
-const fakeCategoryId = '5aeb7ad631fec425026bad5c';
+axios.defaults.baseURL = 'http://255c0912.ngrok.io';
 
 class CategoriesApi {
   constructor() {
-    this.categoryId = fakeCategoryId;
-    this.path = `api/categories/${this.categoryId}/recipes`;
+    this.path = 'api/categories';
   }
 
-  async fetchCategoryRecipes() {
+  async fetchCategoryRecipes(args) {
+    const { categoryId } = args;
     try {
-      const { data } = await axios.get(this.path);
+      const { data } = await axios.get(`${this.path}/${categoryId}/recipes`);
 
       return data.recipes;
     } catch (err) {
@@ -21,10 +19,24 @@ class CategoriesApi {
   }
 
   async createCategoryRecipe(args) {
+    const { categoryId } = args;
+
     try {
-      const res = await axios.post(`${this.path}/new`, { ...args });
- 
-      return res;
+      const resp = await axios.post(`${this.path}/${categoryId}/recipes/new`, { ...args });
+
+      return resp.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async updateCategory(args) {
+    const { categoryId } = args;
+
+    try {
+      const resp = await axios.post(`api/categories/${categoryId}/update`, args);
+
+      return resp.data;
     } catch (err) {
       throw err;
     }
@@ -47,6 +59,66 @@ class UserApi {
       throw err;
     }
   }
+
+  async fetchUserCategories(args) {
+    const { userId } = args;
+
+    try {
+      const resp = await axios.get(`${this.path}/${userId}/categories`);
+
+      return { userCategories: resp.data.categories };
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async deleteUserCategory(args) {
+    const { userId } = args;
+
+    try {
+      const resp = await axios.delete(`${this.path}/${userId}/categories`, { data: args });
+
+      return { categoryIds: resp.data.categoryIds, categoryId: resp.data.categoryId };
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async createUserCategory(args) {
+    const { userId } = args;
+
+    try {
+      const resp = await axios.post(`${this.path}/${userId}/categories`, args);
+
+      return resp.data;
+    } catch (err) {
+      throw err;
+    }
+  }
 }
 
+export { UserApi };
+
 export const User = new UserApi();
+
+// ------------------ Recipes API ------------------
+class RecipesApi {
+  constructor() {
+    this.path = 'api/recipes';
+  }
+
+  async updateRecipe(args) {
+    console.log('Updating recipe with args: ', args);
+    const { recipeId } = args;
+
+    try {
+      const resp = await axios.post(`${this.path}/${recipeId}/update`, args);
+      console.log('Resp data: ', resp.data);
+      return resp.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+}
+
+export { RecipesApi };
