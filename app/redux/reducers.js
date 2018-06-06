@@ -7,10 +7,12 @@ import {
   UserReducer,
   CategoriesReducer,
   RecipesReducer,
+  ProfileReducer,
 } from '../screens';
 import navigation from '../routes/navigationReducer';
 
 export default combineReducers({
+  profile: ProfileReducer,
   recipes: RecipesReducer,
   createCategoryRecipe: CreateRecipeReducer,
   createUserCategory: CreateUserCategoryReducer,

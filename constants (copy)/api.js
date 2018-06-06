@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://4b0c3dfe.ngrok.io';
+axios.defaults.baseURL = 'http://c9c13f12.ngrok.io';
 
 class CategoriesApi {
   constructor() {

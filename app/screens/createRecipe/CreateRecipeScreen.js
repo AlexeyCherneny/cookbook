@@ -41,7 +41,6 @@ export default class CreateRecipeScreen extends React.Component {
   render() {
     const { recipe } = this.props;
 
-    console.log('recipe.isLoading: ', recipe.isLoading)
     if (recipe.isLoading) {
       return (
         <View style={styles.root}>

@@ -2,7 +2,7 @@ import React from 'react';
 import { TabNavigator } from 'react-navigation';
 import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
 
-import { NotificationsScreen, ProfileScreen, CategoriesScreen } from '../screens';
+import { ProfileScreen, CategoriesScreen } from '../screens';
 
 const NavbarDefaultStyle = {
   backgroundColor: 'red',
@@ -65,26 +65,27 @@ export default TabNavigator(
         ),
       }),
     },
-    NotificationsScreen: {
-      screen: NotificationsScreen,
-      navigationOptions: () => ({
-        headerStyle: NavbarDefaultStyle,
-        header: {
-          style: { backgroundColor: 'red' },
-        },
-        tabBarIcon: ({ tintColor }) => (
-          <MaterialIcons
-            name='notifications'
-            size={25}
-            color={tintColor}
-          />
-        ),
-      }),
-    },
+    // NotificationsScreen: {
+    //   screen: NotificationsScreen,
+    //   navigationOptions: () => ({
+    //     headerStyle: NavbarDefaultStyle,
+    //     header: {
+    //       style: { backgroundColor: 'red' },
+    //     },
+    //     tabBarIcon: ({ tintColor }) => (
+    //       <MaterialIcons
+    //         name='notifications'
+    //         size={25}
+    //         color={tintColor}
+    //       />
+    //     ),
+    //   }),
+    // },
     ProfileScreen: {
       screen: ProfileScreen,
       navigationOptions: () => ({
         headerStyle: NavbarDefaultStyle,
+        headerTitleStyle: TitleDefaultStyle,
         title: 'Profile',
         tabBarIcon: ({ tintColor }) => (
           <MaterialIcons
@@ -93,7 +94,6 @@ export default TabNavigator(
             color={tintColor}
           />
         ),
-        tabBarHidden: true,
       }),
     },
   },

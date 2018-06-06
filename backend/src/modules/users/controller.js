@@ -30,6 +30,20 @@ export const loginWithAuth0 = async (req, res) => {
   });
 };
 
+export const getUserInfo = async (req, res) => {
+  const { userId } = req.params;
+
+  const user = await User.findById(userId);
+
+  try {
+    return res.status(201).json({ ...user._doc });
+  } catch (err) {
+    return res
+      .status(400)
+      .json({ error: true, message: 'Can not get user' });
+  }
+};
+
 export const createUserCategory = async (req, res) => {
   const { title } = req.body;
   const { userId } = req.params;

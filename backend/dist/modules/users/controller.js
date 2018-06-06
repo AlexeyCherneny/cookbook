@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deleteUserCategory = exports.getUserCategories = exports.createUserCategory = exports.loginWithAuth0 = undefined;
+exports.deleteUserCategory = exports.getUserCategories = exports.createUserCategory = exports.getUserInfo = exports.loginWithAuth0 = undefined;
 
 var _model = require('./model');
 
@@ -45,6 +45,18 @@ const loginWithAuth0 = exports.loginWithAuth0 = async (req, res) => {
       token: `JWT ${(0, _createToken.createToken)(user)}`
     }
   });
+};
+
+const getUserInfo = exports.getUserInfo = async (req, res) => {
+  const { userId } = req.params;
+
+  const user = await _model2.default.findById(userId);
+
+  try {
+    return res.status(201).json(Object.assign({}, user._doc));
+  } catch (err) {
+    return res.status(400).json({ error: true, message: 'Can not get user' });
+  }
 };
 
 const createUserCategory = exports.createUserCategory = async (req, res) => {
