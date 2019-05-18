@@ -1,17 +1,17 @@
-import Category from './model';
-import { Recipe } from '../recipes';
+import Category from "./model";
+import { Recipe } from "../recipes";
 
 export const createCategory = async (req, res) => {
   const { title } = req.body;
 
   if (!title) {
-    return res.status(400).json({ error: 'Title must be provided' });
-  } else if (typeof title !== 'string') {
-    return res.status(400).json({ error: 'Title must be a string' });
+    return res.status(400).json({ error: "Title must be provided" });
+  } else if (typeof title !== "string") {
+    return res.status(400).json({ error: "Title must be a string" });
   } else if (title.length < 4) {
     return res
       .status(400)
-      .json({ error: 'Title must be at least 4 characters long' });
+      .json({ error: "Title must be at least 4 characters long" });
   }
 
   const category = new Category({ title });
@@ -21,7 +21,7 @@ export const createCategory = async (req, res) => {
   } catch (err) {
     return res
       .status(400)
-      .json({ error: true, message: 'Category couldnt be created' });
+      .json({ error: true, message: "Category couldnt be created" });
   }
 };
 
@@ -29,41 +29,40 @@ export const createCategoryRecipe = async (req, res) => {
   const { title, description } = req.body;
   const { categoryId } = req.params;
 
-  console.log({ title, description, categoryId });
   if (!title) {
-    return res.status(400).json({ error: 'Title must be provided' });
-  } else if (typeof title !== 'string') {
-    return res.status(400).json({ error: 'Title must be a string' });
+    return res.status(400).json({ error: "Title must be provided" });
+  } else if (typeof title !== "string") {
+    return res.status(400).json({ error: "Title must be a string" });
   } else if (title.length < 5) {
     return res
       .status(400)
-      .json({ error: 'Title must be at least 5 characters long' });
+      .json({ error: "Title must be at least 5 characters long" });
   }
 
   if (!description) {
-    return res.status(400).json({ error: 'Description must be provided' });
-  } else if (typeof description !== 'string') {
-    return res.status(400).json({ error: 'Description must be a string' });
+    return res.status(400).json({ error: "Description must be provided" });
+  } else if (typeof description !== "string") {
+    return res.status(400).json({ error: "Description must be a string" });
   } else if (description.length < 5) {
     return res
       .status(400)
-      .json({ error: 'Description must be at least 5 characters long' });
+      .json({ error: "Description must be at least 5 characters long" });
   }
 
   if (!categoryId) {
-    return res.status(400).json({ error: 'Category id must be a provided' });
+    return res.status(400).json({ error: "Category id must be a provided" });
   }
 
   try {
     const { category, recipe } = await Category.addRecipe(categoryId, {
       title,
-      description,
+      description
     });
     return res.status(201).json({ error: false, category, recipe });
   } catch (err) {
     return res
       .status(400)
-      .json({ error: true, message: 'Recipe can not be created' });
+      .json({ error: true, message: "Recipe can not be created" });
   }
 };
 
@@ -111,7 +110,7 @@ export const getCategoryRecipes = async (req, res) => {
   } catch (e) {
     return res
       .status(e.status)
-      .json({ error: true, message: 'Error with user categories' });
+      .json({ error: true, message: "Error with user categories" });
   }
 };
 
@@ -122,12 +121,14 @@ export const updateCategory = async (req, res) => {
   if (!categoryId) {
     return res
       .status(400)
-      .json({ error: true, message: 'You need to provide a category id' });
+      .json({ error: true, message: "You need to provide a category id" });
   }
 
-  const category = await Category.findOneAndUpdate({
-    _id: categoryId },
-  { $set: { title } },
+  const category = await Category.findOneAndUpdate(
+    {
+      _id: categoryId
+    },
+    { $set: { title } }
   );
 
   if (!category) {
@@ -142,14 +143,14 @@ export const updateCategory = async (req, res) => {
     return res.status(200).json({
       error: {
         on: false,
-        message: '',
+        message: ""
       },
-      category: updatedCategory,
+      category: updatedCategory
     });
   } catch (err) {
     return res
       .status(400)
-      .json({ error: true, message: 'Can not fetch category recipes' });
+      .json({ error: true, message: "Can not fetch category recipes" });
   }
 };
 
@@ -158,14 +159,10 @@ export const deleteCategoryRecipe = async (req, res) => {
   const { recipeId } = req.body;
 
   if (!categoryId) {
-    return res
-      .status(400)
-      .json({ error: 'Category id must be provided' });
+    return res.status(400).json({ error: "Category id must be provided" });
   }
   if (!recipeId) {
-    return res
-      .status(400)
-      .json({ error: 'Recipe id must be provided' });
+    return res.status(400).json({ error: "Recipe id must be provided" });
   }
 
   try {
@@ -176,6 +173,6 @@ export const deleteCategoryRecipe = async (req, res) => {
   } catch (e) {
     return res
       .status(e.status)
-      .json({ error: true, message: 'Error with user categories' });
+      .json({ error: true, message: "Error with user categories" });
   }
 };

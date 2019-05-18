@@ -8,7 +8,7 @@ import { LoadingScreen } from './app/components';
 import { Colors } from './constants/Colors';
 
 // import { fontAssets } from './helpers';
-import Root from './app/Root';
+import Root from './app';
 
 import store from './app/redux/store';
 

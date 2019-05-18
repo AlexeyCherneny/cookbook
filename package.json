@@ -2,6 +2,7 @@
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
+    "start": "expo start",
     "postinstall": "rndebugger-open",
     "debug": "open 'rndebugger:/home/chir/development/ReactNativeDebugger/react-native-debugger?host=localhost&port=19001'",
     "lint": "eslint app App.js",

@@ -1,10 +1,10 @@
-import axios from 'axios';
+import axios from "axios";
 
-axios.defaults.baseURL = 'https://4b0c3dfe.ngrok.io';
+axios.defaults.baseURL = "http://0ccd075f.ngrok.io";
 
 class CategoriesApi {
   constructor() {
-    this.path = 'api/categories';
+    this.path = "api/categories";
   }
 
   async fetchCategoryRecipes(args) {
@@ -22,7 +22,9 @@ class CategoriesApi {
     const { categoryId } = args;
 
     try {
-      const resp = await axios.post(`${this.path}/${categoryId}/recipes/new`, { ...args });
+      const resp = await axios.post(`${this.path}/${categoryId}/recipes/new`, {
+        ...args
+      });
 
       return resp.data;
     } catch (err) {
@@ -34,7 +36,9 @@ class CategoriesApi {
     const { categoryId } = args;
 
     try {
-      const resp = await axios.delete(`${this.path}/${categoryId}/recipes`, { data: args });
+      const resp = await axios.delete(`${this.path}/${categoryId}/recipes`, {
+        data: args
+      });
 
       return resp.data;
     } catch (err) {
@@ -46,7 +50,10 @@ class CategoriesApi {
     const { categoryId } = args;
 
     try {
-      const resp = await axios.post(`api/categories/${categoryId}/update`, args);
+      const resp = await axios.post(
+        `api/categories/${categoryId}/update`,
+        args
+      );
 
       return resp.data;
     } catch (err) {
@@ -59,7 +66,7 @@ export { CategoriesApi };
 
 class UserApi {
   constructor() {
-    this.path = 'api/users';
+    this.path = "api/users";
   }
 
   async login(args) {
@@ -81,7 +88,7 @@ class UserApi {
       return resp;
     } catch (err) {
       throw err;
-    }    
+    }
   }
 
   async fetchUserCategories(args) {
@@ -100,9 +107,14 @@ class UserApi {
     const { userId } = args;
 
     try {
-      const resp = await axios.delete(`${this.path}/${userId}/categories`, { data: args });
+      const resp = await axios.delete(`${this.path}/${userId}/categories`, {
+        data: args
+      });
 
-      return { categoryIds: resp.data.categoryIds, categoryId: resp.data.categoryId };
+      return {
+        categoryIds: resp.data.categoryIds,
+        categoryId: resp.data.categoryId
+      };
     } catch (err) {
       throw err;
     }
@@ -128,7 +140,7 @@ export const User = new UserApi();
 // ------------------ Recipes API ------------------
 class RecipesApi {
   constructor() {
-    this.path = 'api/recipes';
+    this.path = "api/recipes";
   }
 
   async updateRecipe(args) {
