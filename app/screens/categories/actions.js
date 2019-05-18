@@ -12,12 +12,12 @@ export const DELETE_CATEGORY_SUCCESS = 'DELETE_CATEGORY_SUCCESS';
 export const DELETE_CATEGORY_ERROR = 'DELETE_CATEGORY_ERROR';
 export const SET_CURRENT_CATEGORY = 'SET_CURRENT_CATEGORY';
 
-export const fetchUserCategories = (args) => ({
+export const fetchUserCategories = args => ({
   type: FETCH_USER_CATEGORIES,
   payload: userApi.fetchUserCategories(args),
 });
 
-export const setCurrentCategory = (args) => ({
+export const setCurrentCategory = args => ({
   type: SET_CURRENT_CATEGORY,
   payload: args,
 });

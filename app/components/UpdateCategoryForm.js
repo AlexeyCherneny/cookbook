@@ -19,21 +19,19 @@ const UpdateCategoryForm = ({
   <View style={styles.container}>
     <Field
       component={TextInputWithValidations}
-      name='title'
-      label='Title'
+      name="title"
+      label="Title"
       value={category && category.title}
-      selectionColor='red'
+      selectionColor="red"
       containerStyle={styles.item}
     />
     <View style={styles.container}>
       <View style={category ? styles.buttons : styles.buttonsSingle}>
-        {category && <View style={styles.button}>
-          <Button
-            onPress={handleCancel}
-            title='Cancel'
-            raised
-          />
-        </View>}
+        {category && (
+          <View style={styles.button}>
+            <Button onPress={handleCancel} title="Cancel" raised />
+          </View>
+        )}
         <View style={styles.button}>
           <Button
             disabled={invalid || submitting}

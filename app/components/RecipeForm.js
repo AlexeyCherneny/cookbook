@@ -20,34 +20,30 @@ class RecipeForm extends React.Component {
       <View style={styles.container}>
         <Field
           component={TextInputWithValidations}
-          name='title'
-          label='Title'
-          defaultValue='no man'
-          value='man'
-          selectionColor='red'
+          name="title"
+          label="Title"
+          defaultValue="no man"
+          value="man"
+          selectionColor="red"
           containerStyle={styles.item}
         />
         <Field
           component={TextInputWithValidations}
-          name='description'
-          label='Description'
-          selectionColor='red'
+          name="description"
+          label="Description"
+          selectionColor="red"
           multiline
           containerStyle={styles.item}
         />
         <View style={styles.buttons}>
           <View style={styles.buttonCancel}>
-            <Button
-              onPress={this.props.handleClose}
-              title='Cancel'
-              raised
-            />
+            <Button onPress={this.props.handleClose} title="Cancel" raised />
           </View>
           <View style={styles.buttonUpdate}>
             <Button
               disabled={this.props.invalid || this.props.submitting}
               onPress={this.props.handleSubmit(this.props.updateRecipe)}
-              title='Update recipe'
+              title="Update recipe"
               raised
             />
           </View>

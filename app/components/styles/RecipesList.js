@@ -58,9 +58,9 @@ const styles = EStyleSheet.create({
   recipeCardDescription: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',    
+    alignItems: 'center',
     fontSize: 15,
-    color: 'white',    
+    color: 'white',
   },
 });
 

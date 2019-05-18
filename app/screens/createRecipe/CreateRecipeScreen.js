@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 
 import { connect } from 'react-redux';
 
-import { CreateRecipeForm } from './components'; 
+import { CreateRecipeForm } from './components';
 import { LoadingScreen } from '../../components';
 import { createRecipe } from './actions';
 import styles from './styles/CreateRecipeScreen';
@@ -22,7 +22,8 @@ const TitleDefaultStyle = {
   state => ({
     categoryId: state.categories.currentCategory._id,
     recipe: state.createCategoryRecipe,
-  }), {
+  }),
+  {
     createRecipe,
   }
 )
@@ -31,13 +32,13 @@ export default class CreateRecipeScreen extends React.Component {
     title: 'Create recipe',
     headerStyle: NavbarDefaultStyle,
     headerTitleStyle: TitleDefaultStyle,
-  })
+  });
 
   _createRecipe = async values => {
     await this.props.createRecipe({ ...values, categoryId: this.props.categoryId });
     this.props.navigation.goBack();
-  }
-  
+  };
+
   render() {
     const { recipe } = this.props;
 
@@ -56,9 +57,7 @@ export default class CreateRecipeScreen extends React.Component {
     }
     return (
       <View style={styles.root}>
-        <CreateRecipeForm
-          createRecipe={(args) => this._createRecipe(args)}
-        /> 
+        <CreateRecipeForm createRecipe={args => this._createRecipe(args)} />
       </View>
     );
   }

@@ -7,25 +7,20 @@ import { TextInputWithValidations } from '../../../components';
 import { createRecipeValidations } from '../validations';
 import styles from './styles/CreateRecipeForm';
 
-const CreateRecipeFrom = ({
-  createRecipe,
-  handleSubmit,
-  invalid,
-  submitting,
-}) => (
+const CreateRecipeFrom = ({ createRecipe, handleSubmit, invalid, submitting }) => (
   <View style={styles.container}>
     <Field
       component={TextInputWithValidations}
-      name='title'
-      label='Title'
-      selectionColor='red'
+      name="title"
+      label="Title"
+      selectionColor="red"
       containerStyle={styles.item}
     />
     <Field
       component={TextInputWithValidations}
-      name='description'
-      label='Description'
-      selectionColor='red'
+      name="description"
+      label="Description"
+      selectionColor="red"
       multiline
       containerStyle={styles.item}
     />
@@ -34,7 +29,7 @@ const CreateRecipeFrom = ({
         <Button
           disabled={invalid || submitting}
           onPress={handleSubmit(createRecipe)}
-          title='Create recipe'
+          title="Create recipe"
           raised
         />
       </View>

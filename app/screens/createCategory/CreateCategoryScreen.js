@@ -8,12 +8,15 @@ import UpdateCategoryForm from '../../components/UpdateCategoryForm';
 
 import styles from './styles/CreateCategoryScreen';
 
-@connect(state => ({
-  userId: state.user.info.id,
-  category: state.createUserCategory,
-}), {
-  createUserCategory,
-})
+@connect(
+  state => ({
+    userId: state.user.info.id,
+    category: state.createUserCategory,
+  }),
+  {
+    createUserCategory,
+  }
+)
 class UdateCategoryModal extends Component {
   _createCategory = async params => {
     await this.props.createUserCategory({
@@ -21,7 +24,7 @@ class UdateCategoryModal extends Component {
       title: params.title,
     });
     this.props.navigation.goBack();
-  }
+  };
 
   render() {
     const { category } = this.props;

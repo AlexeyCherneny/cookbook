@@ -14,36 +14,39 @@ import googleConfig from '../../../constants/googleConfig';
 
 const FlexContainer = styled.View`
   flex: 1;
-  justifyContent: center;
-  alignItems: center;
-  alignSelf: stretch;
+  justifycontent: center;
+  alignitems: center;
+  alignself: stretch;
 `;
 
 const RecipeText = styled.Text`
   color: red;
-  fontSize: 18;
+  fontsize: 18;
 `;
 
 const BottomButtonWrapper = styled.View`
   flex: 0.2;
-  flexDirection: row;
+  flexdirection: row;
 `;
 
 const Button = styled.TouchableOpacity`
-  justifyContent: space-around;
-  alignItems: center;
+  justifycontent: space-around;
+  alignitems: center;
   flex: 1;
-  backgroundColor: ${({ color }) => color};
-  flexDirection: row;
-  paddingHorizontal: 10;
+  backgroundcolor: ${({ color }) => color};
+  flexdirection: row;
+  paddinghorizontal: 10;
 `;
 
-@connect(state => ({
-  isLoading: state.user.isLoading,
-  state,
-}), { login })
+@connect(
+  state => ({
+    isLoading: state.user.isLoading,
+    state,
+  }),
+  { login }
+)
 export default class LoginScreen extends Component {
-  state = {}
+  state = {};
 
   _onLoginPress = name => {
     if (name === 'facebook') {
@@ -51,13 +54,10 @@ export default class LoginScreen extends Component {
     } else {
       this._logInWithGoogle();
     }
-  }
+  };
 
   async _logInWithFacebook() {
-    const {
-      type,
-      token,
-    } = await Facebook.logInWithReadPermissionsAsync(fbConfig.APP_ID, {
+    const { type, token } = await Facebook.logInWithReadPermissionsAsync(fbConfig.APP_ID, {
       permissions: ['public_profile', 'email'],
     });
 
@@ -96,27 +96,25 @@ export default class LoginScreen extends Component {
           <Text style={Fonts.authTitle}>CookBook </Text>
         </FlexContainer>
         <FlexContainer>
-          <FlexContainer>  
-            <Text style={Fonts.authWelcomeTitle}>
-              Welcome 
-            </Text>
-          </FlexContainer> 
-          <FlexContainer>  
+          <FlexContainer>
+            <Text style={Fonts.authWelcomeTitle}>Welcome</Text>
+          </FlexContainer>
+          <FlexContainer>
             <Text style={Fonts.authWelcomeText}>
               Start your <RecipeText>Cook</RecipeText> way
             </Text>
-          </FlexContainer> 
+          </FlexContainer>
         </FlexContainer>
 
         <FlexContainer>
           <BottomButtonWrapper>
-            <Button color='#db3236' onPress={() => this._onLoginPress('google')}>
+            <Button color="#db3236" onPress={() => this._onLoginPress('google')}>
               <Text style={Fonts.buttonAuth}>Connect with</Text>
-              <MaterialCommunityIcons name='google' size={30} color='#fff' />
+              <MaterialCommunityIcons name="google" size={30} color="#fff" />
             </Button>
-            <Button color='#3b5998' onPress={() => this._onLoginPress('facebook')}>
+            <Button color="#3b5998" onPress={() => this._onLoginPress('facebook')}>
               <Text style={Fonts.buttonAuth}>connect-with</Text>
-              <MaterialCommunityIcons name='facebook' size={30} color='#fff' />
+              <MaterialCommunityIcons name="facebook" size={30} color="#fff" />
             </Button>
           </BottomButtonWrapper>
         </FlexContainer>

@@ -6,19 +6,22 @@ import { fetchUserCategories, deleteCategory, setCurrentCategory } from './actio
 import { LoadingScreen, CategoriesList, UpdateCategoryModal } from '../../components';
 import styles from './styles/CategoriesScreen';
 
-@connect(state => ({
-  user: state.user,
-  categories: state.categories,
-}), {
-  setCurrentCategory,
-  fetchUserCategories,
-  deleteCategory,
-})
+@connect(
+  state => ({
+    user: state.user,
+    categories: state.categories,
+  }),
+  {
+    setCurrentCategory,
+    fetchUserCategories,
+    deleteCategory,
+  }
+)
 class CategoriesScreen extends Component {
   state = {
     editModalVisible: false,
     currentCategory: {},
-  }
+  };
 
   componentDidMount() {
     this.props.fetchUserCategories({ userId: this.props.user.info.id });
@@ -26,12 +29,13 @@ class CategoriesScreen extends Component {
 
   _deleteCategoryRequest(params) {
     Alert.alert('Delete', 'Delete category', [
-      { 
+      {
         text: 'Delete',
-        onPress: () => this.props.deleteCategory({
-          ...params,
-          userId: this.props.user.info.id,
-        }),
+        onPress: () =>
+          this.props.deleteCategory({
+            ...params,
+            userId: this.props.user.info.id,
+          }),
       },
       { text: 'Cancel', onPress: () => {} },
     ]);
@@ -57,7 +61,7 @@ class CategoriesScreen extends Component {
     if (this.props.categories) {
       isFetched = this.props.categories.isFetched;
       userCategories = this.props.categories.userCategories;
-      error = this.props.categories.error.on;  
+      error = this.props.categories.error.on;
     }
 
     if (!isFetched) {
@@ -65,9 +69,7 @@ class CategoriesScreen extends Component {
     } else if (error.on) {
       return (
         <View>
-          <Text>
-            {error.message}
-          </Text>
+          <Text>{error.message}</Text>
         </View>
       );
     }

@@ -15,41 +15,44 @@ const TitleDefaultStyle = {
   fontSize: 20,
 };
 
-export default StackNavigator({
-  Home: {
-    screen: HomeNavigator,
+export default StackNavigator(
+  {
+    Home: {
+      screen: HomeNavigator,
+    },
+    CategoryRecipes: {
+      screen: RecipesScreen,
+      navigationOptions: ({ navigation }) => ({
+        title: 'Recipes',
+        headerStyle: NavbarDefaultStyle,
+        headerTitleStyle: TitleDefaultStyle,
+        headerRight: (
+          <MaterialIcons
+            name="add-circle"
+            style={{
+              marginRight: 10,
+            }}
+            onPress={() => navigation.navigate('CreateRecipe')}
+            size={35}
+            color="white"
+          />
+        ),
+        tabBarHidden: true,
+      }),
+    },
+    CreateCategory: {
+      screen: CreateCategoryScreen,
+      navigationOptions: () => ({
+        title: 'Create category',
+        headerStyle: NavbarDefaultStyle,
+        headerTitleStyle: TitleDefaultStyle,
+      }),
+    },
+    CreateRecipe: {
+      screen: CreateRecipeScreen,
+    },
   },
-  CategoryRecipes: {
-    screen: RecipesScreen,
-    navigationOptions: ({ navigation }) => ({
-      title: 'Recipes',
-      headerStyle: NavbarDefaultStyle,
-      headerTitleStyle: TitleDefaultStyle,
-      headerRight: (
-        <MaterialIcons
-          name='add-circle'
-          style={{
-            marginRight: 10,
-          }}
-          onPress={() => navigation.navigate('CreateRecipe')}
-          size={35}
-          color='white'
-        />
-      ),
-      tabBarHidden: true,
-    }),
-  },
-  CreateCategory: {
-    screen: CreateCategoryScreen,
-    navigationOptions: () => ({
-      title: 'Create category',
-      headerStyle: NavbarDefaultStyle,
-      headerTitleStyle: TitleDefaultStyle,
-    }),
-  },
-  CreateRecipe: {
-    screen: CreateRecipeScreen,
-  },
-}, {
-  mode: 'card',
-});
+  {
+    mode: 'card',
+  }
+);

@@ -6,7 +6,7 @@ export const createRecipeValidations = values => {
   requiredFields.forEach(field => {
     if (!values[field]) {
       errors[field] = 'Reqired';
-    } 
+    }
   });
 
   if (values.title && values.title.length < 5) {

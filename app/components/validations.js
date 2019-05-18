@@ -6,7 +6,7 @@ export const updateCategoryValidations = values => {
   requiredFields.forEach(field => {
     if (!values[field]) {
       errors[field] = 'Reqired';
-    } 
+    }
   });
 
   if (values.title && values.title.length < 5) {
@@ -24,7 +24,7 @@ export const recipeValidations = values => {
   requiredFields.forEach(field => {
     if (!values[field]) {
       errors[field] = 'Reqired';
-    } 
+    }
   });
 
   if (values.title && values.title.length < 5) {

@@ -5,9 +5,12 @@ import { connect } from 'react-redux';
 
 import styles from './styles/RecipeModal';
 
-@connect(state => ({
-  userId: state.user.info.id,
-}), {})
+@connect(
+  state => ({
+    userId: state.user.info.id,
+  }),
+  {}
+)
 class RecipeModal extends Component {
   render() {
     return (
@@ -18,7 +21,7 @@ class RecipeModal extends Component {
       >
         <View style={styles.root}>
           <View style={styles.headerContainer}>
-            <Image resizeMode='cover' style={styles.preview} source={require('../img/s800.webp')} />
+            <Image resizeMode="cover" style={styles.preview} source={require('../img/s800.webp')} />
           </View>
 
           <View style={styles.titleContainer}>
@@ -30,9 +33,9 @@ class RecipeModal extends Component {
           </View>
 
           <View style={styles.buttonsContainer}>
-            <Button title='Back' onPress={this.props.handleClose} />
-            <Button title='Delete' onPress={this.props.handleDelete} />
-            <Button title='Edit' onPress={this.props.handleEdit} />
+            <Button title="Back" onPress={this.props.handleClose} />
+            <Button title="Delete" onPress={this.props.handleDelete} />
+            <Button title="Edit" onPress={this.props.handleEdit} />
           </View>
         </View>
       </Modal>
