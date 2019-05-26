@@ -47,22 +47,16 @@ export default TabNavigator(
         headerTitleStyle: TitleDefaultStyle,
         headerRight: (
           <MaterialIcons
-            name='add-circle'
+            name="add-circle"
             style={{
               marginRight: 10,
             }}
             onPress={() => navigation.navigate('CreateCategory')}
             size={35}
-            color='white'
+            color="white"
           />
         ),
-        tabBarIcon: ({ tintColor }) => (
-          <FontAwesome
-            name="home"
-            size={25}
-            color={tintColor}
-          />
-        ),
+        tabBarIcon: ({ tintColor }) => <FontAwesome name="home" size={25} color={tintColor} />,
       }),
     },
     // NotificationsScreen: {
@@ -88,11 +82,7 @@ export default TabNavigator(
         headerTitleStyle: TitleDefaultStyle,
         title: 'Profile',
         tabBarIcon: ({ tintColor }) => (
-          <MaterialIcons
-            name='account-circle'
-            size={25}
-            color={tintColor}
-          />
+          <MaterialIcons name="account-circle" size={25} color={tintColor} />
         ),
       }),
     },

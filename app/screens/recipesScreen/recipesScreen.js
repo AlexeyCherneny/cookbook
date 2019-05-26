@@ -6,22 +6,25 @@ import { fetchCategoryRecipes, setCurrentRecipe, deleteCategoryRecipe } from './
 import { LoadingScreen, RecipesList, RecipeModal, RecipeProfileFormModal } from '../../components';
 import styles from './styles/recipesScreen';
 
-@connect(state => ({
-  user: state.user,
-  currentRecipe: state.recipes.currentRecipe,
-  currentCategory: state.categories.currentCategory,
-  recipes: state.recipes,
-  state,
-}), {
-  fetchCategoryRecipes,
-  deleteCategoryRecipe,
-  setCurrentRecipe,
-})
+@connect(
+  state => ({
+    user: state.user,
+    currentRecipe: state.recipes.currentRecipe,
+    currentCategory: state.categories.currentCategory,
+    recipes: state.recipes,
+    state,
+  }),
+  {
+    fetchCategoryRecipes,
+    deleteCategoryRecipe,
+    setCurrentRecipe,
+  }
+)
 class RecipesScreen extends Component {
   state = {
     recipeModalVisible: false,
     recipeProfileModalVisible: false,
-  }
+  };
 
   componentDidMount() {
     this.props.fetchCategoryRecipes({ categoryId: this.props.currentCategory._id });
@@ -41,7 +44,7 @@ class RecipesScreen extends Component {
 
   handleDelete() {
     Alert.alert('Delete', 'Delete category', [
-      { 
+      {
         text: 'Delete',
         onPress: () => {
           this.props.deleteCategoryRecipe({
@@ -68,17 +71,15 @@ class RecipesScreen extends Component {
     if (this.props.recipes) {
       isFetched = this.props.recipes.isFetched;
       categoryRecipes = this.props.recipes.categoryRecipes;
-      error = this.props.recipes.error.on;  
+      error = this.props.recipes.error.on;
     }
-    
+
     if (!isFetched) {
       return <LoadingScreen />;
     } else if (error.on) {
       return (
         <View>
-          <Text>
-            {error.message}
-          </Text>
+          <Text>{error.message}</Text>
         </View>
       );
     }
@@ -86,14 +87,22 @@ class RecipesScreen extends Component {
     return (
       <View style={styles.root}>
         <RecipeModal
-          recipe={this.props.currentRecipe === undefined ? { title: '', description: '' } : this.props.currentRecipe}
+          recipe={
+            this.props.currentRecipe === undefined
+              ? { title: '', description: '' }
+              : this.props.currentRecipe
+          }
           visible={this.state.recipeModalVisible}
           handleClose={() => this.toggleRecipeModal()}
           handleDelete={() => this.handleDelete()}
           handleEdit={() => this.toggleUpdateModal()}
         />
         <RecipeProfileFormModal
-          recipe={this.props.currentRecipe === undefined ? { title: '', description: '' } : this.props.currentRecipe}
+          recipe={
+            this.props.currentRecipe === undefined
+              ? { title: '', description: '' }
+              : this.props.currentRecipe
+          }
           visible={this.state.recipeProfileModalVisible}
           handleClose={() => this.toggleUpdateModal()}
         />

@@ -38,7 +38,7 @@ function logoutError(error) {
 }
 
 export function login(token, provider) {
-  return async (dispatch) => {
+  return async dispatch => {
     dispatch({ type: LOGIN });
     try {
       const data = await User.login({ token, provider });
@@ -51,7 +51,7 @@ export function login(token, provider) {
 }
 
 export function logout() {
-  return async (dispatch) => {
+  return async dispatch => {
     dispatch({ type: LOGOUT });
     try {
       return dispatch(logoutSuccess());

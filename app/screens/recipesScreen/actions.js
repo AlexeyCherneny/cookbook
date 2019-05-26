@@ -12,12 +12,12 @@ export const DELETE_CATEGORY_RECIPE = 'DELETE_CATEGORY_RECIPE';
 export const DELETE_CATEGORY_RECIPE_SUCCESS = 'DELETE_CATEGORY_RECIPE_SUCCESS';
 export const DELETE_CATEGORY_RECIPE_ERROR = 'DELETE_CATEGORY_RECIPE_ERROR';
 
-export const setCurrentRecipe = (args) => ({
+export const setCurrentRecipe = args => ({
   type: SET_CURRENT_RECIPE,
   payload: args,
 });
 
-export const fetchCategoryRecipes = (args) => ({
+export const fetchCategoryRecipes = args => ({
   type: FETCH_CATEGORY_RECIPES,
   payload: categoriesApi.fetchCategoryRecipes(args),
 });

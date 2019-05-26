@@ -6,11 +6,14 @@ import { updateRecipe } from '../screens/recipesScreen/actions';
 import RecipeForm from './RecipeForm';
 // import styles from './styles/RecipeProfileModal';
 
-@connect(state => ({
-  userId: state.user.info.id,
-}), {
-  updateRecipe,
-})
+@connect(
+  state => ({
+    userId: state.user.info.id,
+  }),
+  {
+    updateRecipe,
+  }
+)
 class RecipeProfileModal extends Component {
   _updateRecipe = async args => {
     await this.props.updateRecipe({
@@ -19,7 +22,7 @@ class RecipeProfileModal extends Component {
       description: args.description,
     });
     this.props.handleClose();
-  }
+  };
 
   render() {
     return (

@@ -1,8 +1,4 @@
-import {
-  FETCH_USER_INFO,
-  FETCH_USER_INFO_SUCCESS,
-  FETCH_USER_INFO_ERROR,
-} from './actions';
+import { FETCH_USER_INFO, FETCH_USER_INFO_SUCCESS, FETCH_USER_INFO_ERROR } from './actions';
 
 const initialState = {
   error: {

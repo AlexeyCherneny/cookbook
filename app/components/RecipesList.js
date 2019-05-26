@@ -17,15 +17,17 @@ const RecipesList = props => (
             style={styles.recipeCard}
           >
             <View>
-              <Image resizeMode='cover' style={styles.preview} source={require('../img/s800.webp')} />
+              <Image
+                resizeMode="cover"
+                style={styles.preview}
+                source={require('../img/s800.webp')}
+              />
             </View>
             <View style={styles.recipeCardTopContainer}>
               <Text style={styles.recipeCardTitle}>{recipe.title}</Text>
             </View>
             <View style={styles.recipeCardBottomContainer}>
-              <Text style={styles.recipeCardDescription}>
-                {recipe.description}
-              </Text>
+              <Text style={styles.recipeCardDescription}>{recipe.description}</Text>
             </View>
           </TouchableOpacity>
         ))}

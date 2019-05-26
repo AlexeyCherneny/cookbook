@@ -9,14 +9,17 @@ import {
 import { LoadingScreen, RecipesList, CategoriesList } from '../../components';
 import styles from './styles/HomeScreen';
 
-@connect(state => ({
-  recipes: state.home.recipes,
-  id: state.user.info.id,
-  state,
-}), {
-  // fetchCategoryRecipes,
-  fetchUserCategories,
-})
+@connect(
+  state => ({
+    recipes: state.home.recipes,
+    id: state.user.info.id,
+    state,
+  }),
+  {
+    // fetchCategoryRecipes,
+    fetchUserCategories,
+  }
+)
 class HomeScreen extends Component {
   componentDidMount() {
     // this.props.fetchCategoryRecipes();
@@ -38,18 +41,14 @@ class HomeScreen extends Component {
     } else if (error.on) {
       return (
         <View>
-          <Text>
-            {error.message}
-          </Text>
+          <Text>{error.message}</Text>
         </View>
       );
     }
-    console.log(categoryRecipes)
+    console.log(categoryRecipes);
     return (
       <View style={styles.root}>
-        <View style={styles.topContainer}>
-          {/* <CategoriesList recipes={categories} /> */}
-        </View>
+        <View style={styles.topContainer}>{/* <CategoriesList recipes={categories} /> */}</View>
       </View>
     );
   }

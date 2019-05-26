@@ -6,10 +6,7 @@ import { autoRehydrate } from 'redux-persist';
 
 import reducers from './reducers';
 
-const middlewares = [
-  promiseMiddleware(),
-  thunk,
-];
+const middlewares = [promiseMiddleware(), thunk];
 
 // if (__DEV__) { // eslint-disable-line
 //   middlewares.push(createLogger());
@@ -18,5 +15,8 @@ const middlewares = [
 export default createStore(
   reducers,
   undefined,
-  compose(applyMiddleware(...middlewares), autoRehydrate()),
+  compose(
+    applyMiddleware(...middlewares),
+    autoRehydrate()
+  )
 );

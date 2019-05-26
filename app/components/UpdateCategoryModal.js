@@ -7,11 +7,14 @@ import UpdateCategoryForm from './UpdateCategoryForm';
 
 // import styles from './styles/UdateCategoryModal';
 
-@connect(state => ({
-  userId: state.user.info.id,
-}), {
-  updateCategory,
-})
+@connect(
+  state => ({
+    userId: state.user.info.id,
+  }),
+  {
+    updateCategory,
+  }
+)
 class UdateCategoryModal extends Component {
   _updateCategory = async params => {
     await this.props.updateCategory({
@@ -19,7 +22,7 @@ class UdateCategoryModal extends Component {
       title: params.title,
     });
     this.props.handleClose();
-  }
+  };
 
   render() {
     return (

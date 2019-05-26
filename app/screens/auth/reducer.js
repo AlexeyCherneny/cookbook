@@ -1,11 +1,4 @@
-import {
-  LOGIN,
-  LOGIN_ERROR,
-  LOGIN_SUCCESS,
-  LOGOUT,
-  LOGOUT_ERROR,
-  LOGOUT_SUCCESS,
-} from './actions';
+import { LOGIN, LOGIN_ERROR, LOGIN_SUCCESS, LOGOUT, LOGOUT_ERROR, LOGOUT_SUCCESS } from './actions';
 
 const initialState = {
   isLogged: false,

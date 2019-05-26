@@ -3,7 +3,7 @@ import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import styles from './styles/CategoriesList';
 
-const CategoriesList = (props) => (
+const CategoriesList = props => (
   <View style={styles.root}>
     <View style={styles.categoriesListContentContainer}>
       <ScrollView style={styles.categoriesListScroll}>
@@ -19,7 +19,7 @@ const CategoriesList = (props) => (
             <View style={styles.categoryCardRightContainer}>
               <View style={styles.categoryCardButton}>
                 <MaterialIcons
-                  name='edit'
+                  name="edit"
                   size={35}
                   color={'white'}
                   onPress={() => props.toggleUpdateModal({ category })}
@@ -27,7 +27,7 @@ const CategoriesList = (props) => (
               </View>
               <View style={styles.categoryCardButton}>
                 <MaterialIcons
-                  name='delete'
+                  name="delete"
                   size={35}
                   color={'white'}
                   onPress={() => props.deleteCategoryRequest({ categoryId: category._id })}

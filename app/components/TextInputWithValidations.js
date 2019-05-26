@@ -11,15 +11,10 @@ const TextInputWithValidations = ({
 }) => (
   <View style={containerStyle}>
     <FormLabel labelStyle={{ color: '#384259' }}>{label}</FormLabel>
-    <FormInput
-      {...input}
-      {...custom}
-    />
-    {error && touched &&
-      <FormValidationMessage labelStyle={{ color: 'red' }}>
-        {error}
-      </FormValidationMessage>
-    }
+    <FormInput {...input} {...custom} />
+    {error && touched && (
+      <FormValidationMessage labelStyle={{ color: 'red' }}>{error}</FormValidationMessage>
+    )}
   </View>
 );
 
