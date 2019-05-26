@@ -1,10 +1,10 @@
-import axios from "axios";
+import axios from 'axios';
 
-axios.defaults.baseURL = "http://0ccd075f.ngrok.io";
+axios.defaults.baseURL = 'http://a58271f6.ngrok.io';
 
 class CategoriesApi {
   constructor() {
-    this.path = "api/categories";
+    this.path = 'api/categories';
   }
 
   async fetchCategoryRecipes(args) {
@@ -23,7 +23,7 @@ class CategoriesApi {
 
     try {
       const resp = await axios.post(`${this.path}/${categoryId}/recipes/new`, {
-        ...args
+        ...args,
       });
 
       return resp.data;
@@ -37,7 +37,7 @@ class CategoriesApi {
 
     try {
       const resp = await axios.delete(`${this.path}/${categoryId}/recipes`, {
-        data: args
+        data: args,
       });
 
       return resp.data;
@@ -50,10 +50,7 @@ class CategoriesApi {
     const { categoryId } = args;
 
     try {
-      const resp = await axios.post(
-        `api/categories/${categoryId}/update`,
-        args
-      );
+      const resp = await axios.post(`api/categories/${categoryId}/update`, args);
 
       return resp.data;
     } catch (err) {
@@ -66,7 +63,7 @@ export { CategoriesApi };
 
 class UserApi {
   constructor() {
-    this.path = "api/users";
+    this.path = 'api/users';
   }
 
   async login(args) {
@@ -108,12 +105,12 @@ class UserApi {
 
     try {
       const resp = await axios.delete(`${this.path}/${userId}/categories`, {
-        data: args
+        data: args,
       });
 
       return {
         categoryIds: resp.data.categoryIds,
-        categoryId: resp.data.categoryId
+        categoryId: resp.data.categoryId,
       };
     } catch (err) {
       throw err;
@@ -140,7 +137,7 @@ export const User = new UserApi();
 // ------------------ Recipes API ------------------
 class RecipesApi {
   constructor() {
-    this.path = "api/recipes";
+    this.path = 'api/recipes';
   }
 
   async updateRecipe(args) {
